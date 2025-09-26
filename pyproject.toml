@@ -1,0 +1,18 @@
+[project]
+name = "pharmassist"
+version = "0.1.0"
+description = "Agentic Drug Launch Assistant demo built from Ed Donner's course"
+requires-python = ">=3.10"
+
+dependencies = [
+  "gradio",
+  "crewai",
+  "langgraph",
+  "autogen-agentchat",
+  "pydantic",
+  "python-dotenv",
+  "pandas",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"

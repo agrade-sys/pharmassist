@@ -1,0 +1,4 @@
+site,completion_pct,enrolled,adverse_events
+Site A,60,40,1
+Site B,45,30,1
+Site C,55,50,0
