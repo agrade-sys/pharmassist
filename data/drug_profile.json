@@ -1,1 +1,35 @@
-{"name":"CardioRelief","indication":"Heart Failure","stage":"Phase II","target_market":"EU"}
+{
+    "name": "CardioRelief",
+    "indication": "Chronic Heart Failure (NYHA Class II–III)",
+    "stage": "Phase IIb Clinical Trial",
+    "target_market": "European Union, Malaysia, Singapore",
+    "mechanism": "Selective Beta-3 Adrenergic Receptor Agonist",
+    "dosage_form": "Oral tablet, 25 mg once daily",
+    "sponsor": "PharmaNova Therapeutics",
+    "principal_investigators": [
+      {"name": "Dr. Aisha Rahman", "institution": "University of Malaya"},
+      {"name": "Prof. John Tan", "institution": "National Heart Centre Singapore"}
+    ],
+    "trial_sites": [
+      {"country": "Malaysia", "number_of_patients": 120},
+      {"country": "Germany", "number_of_patients": 200},
+      {"country": "Singapore", "number_of_patients": 80}
+    ],
+    "safety_profile": {
+      "common_adverse_events": ["Mild dizziness", "Headache", "Nausea"],
+      "serious_adverse_events": ["Rare cases of arrhythmia"],
+      "discontinuation_rate": "5%"
+    },
+    "efficacy_signals": {
+      "primary_endpoint": "Improvement in left ventricular ejection fraction (LVEF)",
+      "secondary_endpoints": ["6-minute walk test", "Quality of Life (QoL) score"],
+      "observed_effect": "10% relative improvement in LVEF after 12 weeks"
+    },
+    "competitors": [
+      "Entresto (sacubitril/valsartan)",
+      "Verquvo (vericiguat)"
+    ],
+    "regulatory_path": "EMA Conditional Approval followed by FDA Breakthrough Therapy Designation",
+    "notes": "Strong efficacy signal but requires larger sample size for Phase III confirmation. Potential market differentiation through improved tolerability profile compared to existing therapies."
+  }
+  
