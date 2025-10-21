@@ -1,35 +1,166 @@
 {
-    "name": "CardioRelief",
-    "indication": "Chronic Heart Failure (NYHA Class II–III)",
-    "stage": "Phase IIb Clinical Trial",
-    "target_market": "European Union, Malaysia, Singapore",
-    "mechanism": "Selective Beta-3 Adrenergic Receptor Agonist",
-    "dosage_form": "Oral tablet, 25 mg once daily",
-    "sponsor": "PharmaNova Therapeutics",
-    "principal_investigators": [
-      {"name": "Dr. Aisha Rahman", "institution": "University of Malaya"},
-      {"name": "Prof. John Tan", "institution": "National Heart Centre Singapore"}
-    ],
-    "trial_sites": [
-      {"country": "Malaysia", "number_of_patients": 120},
-      {"country": "Germany", "number_of_patients": 200},
-      {"country": "Singapore", "number_of_patients": 80}
-    ],
-    "safety_profile": {
-      "common_adverse_events": ["Mild dizziness", "Headache", "Nausea"],
-      "serious_adverse_events": ["Rare cases of arrhythmia"],
-      "discontinuation_rate": "5%"
-    },
-    "efficacy_signals": {
-      "primary_endpoint": "Improvement in left ventricular ejection fraction (LVEF)",
-      "secondary_endpoints": ["6-minute walk test", "Quality of Life (QoL) score"],
-      "observed_effect": "10% relative improvement in LVEF after 12 weeks"
-    },
-    "competitors": [
-      "Entresto (sacubitril/valsartan)",
-      "Verquvo (vericiguat)"
-    ],
-    "regulatory_path": "EMA Conditional Approval followed by FDA Breakthrough Therapy Designation",
-    "notes": "Strong efficacy signal but requires larger sample size for Phase III confirmation. Potential market differentiation through improved tolerability profile compared to existing therapies."
-  }
+  "name": "CardioRelief",
+  "indication": "Chronic Heart Failure (NYHA Class II–III)",
+  "stage": "Phase IIb Clinical Trial (Final Stage)",
+  "target_market": ["European Union", "Malaysia", "Singapore"],
+  "mechanism": "Selective Beta-3 Adrenergic Receptor Agonist",
+  "dosage_form": "Oral tablet, 25 mg once daily",
+  "sponsor": "PharmaNova Therapeutics",
   
+  "clinical_operations": {
+      "phase_iib_status": {
+          "enrollment_deadline": "2025-12-31",
+          "total_enrolled": 740,
+          "total_target": 788,
+          "completion_percentage": 93.9,
+          "dropout_concern": "SITE-007 Hamburg has 14% dropout - investigating protocol violations",
+          "efficacy_readiness": "Meets Phase III threshold (9.5-12.1% LVEF improvement)",
+          "safety_readiness": "SAE rate 0.95% acceptable, but monitoring SITE-007 (2 SAEs)"
+      },
+      "phase_iii_requirements": {
+          "patients_needed": 1200,
+          "sites_required": 35,
+          "duration_months": 24,
+          "estimated_cost_usd": 85000000,
+          "key_challenge": "Geographic expansion needed - only 8 Phase IIb sites"
+      }
+  },
+
+  "regulatory_operations": {
+      "approval_pathway": "EMA Conditional Approval + FDA Breakthrough Therapy Designation",
+      "regulatory_timeline": {
+          "phase_iii_initiation": "Q2 2026",
+          "interim_analysis": "Q4 2027",
+          "ema_submission": "Q2 2028",
+          "fda_submission": "Q4 2028",
+          "expected_ema_approval": "Q4 2028",
+          "expected_fda_approval": "Q2 2029"
+      },
+      "regulatory_risks": [
+          {
+              "risk": "SITE-007 protocol violations (5 reported)",
+              "mitigation": "Enhanced monitoring, potential site remediation",
+              "impact": "Could delay EMA submission if not resolved"
+          },
+          {
+              "risk": "Arrhythmia SAEs in elderly patients (Phase IIb)",
+              "mitigation": "Mandatory cardiac monitoring in Phase III",
+              "impact": "Additional patient screening costs"
+          }
+      ],
+      "submission_readiness": "85% - Need final SITE-007 resolution before IND/CTA submission",
+      "cmc_status": "Chemistry, Manufacturing, Control documentation 75% complete"
+  },
+
+  "manufacturing_operations": {
+      "current_capacity": {
+          "facility": "PharmaNova Manufacturing, Basel, Switzerland",
+          "phase_iib_production": "50,000 tablets/month",
+          "current_utilization": "65%"
+      },
+      "phase_iii_requirements": {
+          "production_needed": "200,000 tablets/month",
+          "scaling_timeline": "12 months",
+          "expansion_investment_usd": 8500000
+      },
+      "supply_chain_constraints": [
+          {
+              "component": "Active Pharmaceutical Ingredient (API)",
+              "supplier": "Chemsynth AG, Germany",
+              "lead_time_weeks": 16,
+              "current_stock": "6 months",
+              "risk": "Single-source supplier - geopolitical vulnerability",
+              "mitigation": "Qualify backup supplier in Malaysia"
+          },
+          {
+              "component": "Packaging (Blister packs)",
+              "supplier": "Huhtamaki, Germany",
+              "lead_time_weeks": 8,
+              "current_stock": "3 months",
+              "risk": "Low inventory buffer",
+              "mitigation": "Increase safety stock to 4 months by Q1 2026"
+          }
+      ],
+      "manufacturing_readiness": "70% - Requires expansion capex approval and timeline acceleration",
+      "regulatory_inspections_pending": "EMEA GMP audit scheduled Q1 2026"
+  },
+
+  "commercial_operations": {
+      "market_entry_strategy": {
+          "primary_launch": "Germany (largest market)",
+          "secondary_launch": "UK, France, Spain (3-6 months post-launch)",
+          "asia_pacific_launch": "Singapore, Malaysia (9-12 months post-launch)"
+      },
+      "competitor_landscape": [
+          {"drug": "Entresto (sacubitril/valsartan)", "market_share": "45%", "price_per_month_usd": 450},
+          {"drug": "Verquvo (vericiguat)", "market_share": "25%", "price_per_month_usd": 550},
+          {"drug": "SGLT2 inhibitors (various)", "market_share": "20%", "price_per_month_usd": 200}
+      ],
+      "pricing_strategy": {
+          "target_price_usd": 480,
+          "rationale": "Premium to Entresto due to superior efficacy (10% vs 5% LVEF improvement)",
+          "reimbursement_status": "Tier 2 specialist approval required - estimated 60-75% coverage"
+      },
+      "key_opinion_leaders": {
+          "target_specialists": "Cardiologists, Heart Failure Specialists",
+          "target_count": 500,
+          "target_hospitals": 150,
+          "engagement_budget_usd": 3500000
+      },
+      "commercial_readiness": "65% - Awaiting Phase III interim data for full dossier completion",
+      "marketing_materials_status": "60% complete (pending clinical efficacy claims validation)"
+  },
+
+  "principal_investigators": [
+      {"name": "Dr. Aisha Rahman", "institution": "University of Malaya", "role": "Regional Lead - APAC", "sites_managed": 3},
+      {"name": "Prof. John Tan", "institution": "National Heart Centre Singapore", "role": "Regional Lead - APAC", "sites_managed": 2},
+      {"name": "Dr. Klaus Mueller", "institution": "Charité Hospital Berlin", "role": "Regional Lead - EU", "sites_managed": 3}
+  ],
+
+  "phase_iib_trial_sites": [
+      {"country": "Malaysia", "number_of_patients": 208, "sites": 3},
+      {"country": "Germany", "number_of_patients": 263, "sites": 3},
+      {"country": "Singapore", "number_of_patients": 129, "sites": 2}
+  ],
+
+  "safety_profile": {
+      "common_adverse_events": ["Mild dizziness (12%)", "Headache (8%)", "Nausea (6%)"],
+      "serious_adverse_events": [
+          {"event": "Arrhythmia", "frequency": "0.9%", "severity": "Serious", "action": "Mandatory cardiac monitoring Phase III"},
+          {"event": "Hypotension", "frequency": "0.4%", "severity": "Moderate", "action": "Patient education on standing"}
+      ],
+      "discontinuation_rate": "6.1%",
+      "serious_adverse_event_count": 7,
+      "regulatory_signals": "Low signal, but arrhythmia in elderly requires Phase III focus"
+  },
+
+  "efficacy_signals": {
+      "primary_endpoint": "Improvement in left ventricular ejection fraction (LVEF)",
+      "secondary_endpoints": ["6-minute walk test distance", "Quality of Life (QoL) score", "Hospitalization reduction"],
+      "phase_iib_results": {
+          "lvef_improvement_mean": "10.2%",
+          "lvef_improvement_range": "8.9% to 12.1%",
+          "statistical_significance": "p < 0.001",
+          "clinical_significance": "Exceeds Phase III threshold"
+      },
+      "phase_iii_requirements": {
+          "primary_endpoint_target": ">8% LVEF improvement",
+          "power": "90% power to detect difference",
+          "sample_size_rationale": "1200 patients across 35 sites"
+      }
+  },
+
+  "operational_readiness_summary": {
+      "clinical_readiness": "HIGH - Phase IIb data strong, minor SITE-007 remediation needed",
+      "regulatory_readiness": "MEDIUM - CMC 75%, submission docs in progress, SITE-007 resolution pending",
+      "manufacturing_readiness": "LOW - Requires $8.5M expansion, 12-month timeline critical",
+      "commercial_readiness": "MEDIUM - Pricing approved, KOL strategy ready, marketing materials 60% complete",
+      "go_no_go_decision_date": "2025-09-30",
+      "critical_path_items": [
+          "Manufacturing expansion capex approval (highest impact)",
+          "SITE-007 remediation completion",
+          "EMEA GMP audit passing",
+          "CMC documentation finalization"
+      ]
+  }
+}
