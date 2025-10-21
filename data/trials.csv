@@ -1,4 +1,9 @@
-site,completion_pct,enrolled,adverse_events
-Site A,60,40,1
-Site B,45,30,1
-Site C,55,50,0
+site_id,site_name,country,enrollment_target,enrolled,completion_pct,dropout_rate,protocol_violations,adverse_events_total,serious_adverse_events,efficacy_lvef_improvement,status
+SITE-001,University of Malaya Medical Centre,Malaysia,120,112,78,8,2,14,1,9.5%,Active
+SITE-002,National Heart Centre Singapore,Singapore,80,75,82,6,1,8,0,11.2%,Active
+SITE-003,Charité Hospital Berlin,Germany,100,98,65,12,4,18,2,10.1%,Ongoing
+SITE-004,Munich Heart Institute,Germany,100,89,71,9,3,15,1,10.8%,Active
+SITE-005,Kuala Lumpur Hospital,Malaysia,60,58,75,7,1,9,0,8.9%,Active
+SITE-006,National University Hospital Singapore,Singapore,60,54,79,10,2,11,1,10.5%,Active
+SITE-007,Hamburg University Medical,Germany,80,76,68,14,5,16,2,9.3%,Delayed
+SITE-008,Cyberjaya Medical Centre,Malaysia,40,38,82,5,0,5,0,12.1%,Active
