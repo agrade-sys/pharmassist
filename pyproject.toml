@@ -13,6 +13,7 @@ dependencies = [
   "python-dotenv",
   "pandas",
   "pypdf>=6.1.0",
+  "crewai-tools>=0.76.0",
 ]
 
 [tool.pytest.ini_options]
