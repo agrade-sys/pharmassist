@@ -1,4 +1,21 @@
-name,specialty,email
-Aisha Rahman,Cardiology,aisha@example.com
-John Tan,GP,john@example.com
-Mei Ling,Oncology,mei@example.com
+doctor_id,name,specialty,institution,country,email,influence_score,phase_iib_investigator,publications_count,conference_presentations,recommended_for_phase_iii,geographic_region,patient_volume_annual,research_interest
+KOL-001,Dr. Aisha Rahman,Cardiology,University of Malaya Medical Centre,Malaysia,aisha.rahman@umalaya.edu.my,95,TRUE,47,12,TRUE,APAC - Malaysia,1200,Heart Failure Management
+KOL-002,Prof. John Tan,Heart Failure Specialist,National Heart Centre Singapore,Singapore,john.tan@nhcs.sg,98,TRUE,63,18,TRUE,APAC - Singapore,1500,Advanced Therapies
+KOL-003,Dr. Klaus Mueller,Interventional Cardiology,Charité Hospital Berlin,Germany,klaus.mueller@charite.de,92,TRUE,51,14,TRUE,EU - Germany,950,Cardiac Imaging
+KOL-004,Dr. Sarah Johnson,General Cardiology,Karolinska Institute,Sweden,s.johnson@ki.se,88,FALSE,38,9,TRUE,EU - Nordic,800,Clinical Outcomes
+KOL-005,Prof. José García,Heart Failure,Hospital Clínic Barcelona,Spain,jgarcia@clinic.ub.es,91,FALSE,55,16,TRUE,EU - Southern,1100,Drug Development
+KOL-006,Dr. Maria Schmidt,Echocardiography,University Medical Center Munich,Germany,m.schmidt@lmu.de,85,FALSE,32,7,TRUE,EU - Germany,750,LVEF Monitoring
+KOL-007,Dr. Rajesh Patel,Cardiology,Apollo Hospitals Kuala Lumpur,Malaysia,r.patel@apollo.com.my,82,FALSE,28,6,TRUE,APAC - Malaysia,900,Patient Management
+KOL-008,Prof. Emma Wilson,Pharmacology,UCL Institute of Cardiovascular Science,UK,e.wilson@ucl.ac.uk,89,FALSE,44,11,TRUE,EU - UK,600,Drug Safety
+KOL-009,Dr. Marco Rossi,Heart Failure,Ospedale dell'Angelo Venice,Italy,m.rossi@ospedale.it,80,FALSE,25,5,FALSE,EU - Southern,700,Clinical Trials
+KOL-010,Dr. Lin Wei,Interventional Cardiologist,National Taiwan University Hospital,Taiwan,lin.wei@ntu.edu.tw,87,FALSE,41,10,TRUE,APAC - Taiwan,850,Emerging Markets
+KOL-011,Dr. Anna Kowalski,Cardiology,Jagiellonian University Krakow,Poland,a.kowalski@uj.edu.pl,79,FALSE,22,4,FALSE,EU - Eastern,650,Cost-Effectiveness
+KOL-012,Prof. Henrik Dahlstrom,Heart Failure,Karolinska University Hospital,Sweden,h.dahlstrom@ki.se,90,FALSE,52,13,TRUE,EU - Nordic,1050,Device Integration
+KOL-013,Dr. Priya Nair,General Cardiology,Max Healthcare Delhi,India,p.nair@maxhealthcare.com,81,FALSE,29,7,TRUE,APAC - India,1300,Market Expansion
+KOL-014,Dr. Friedrich Stein,Interventional,University Hospital Cologne,Germany,f.stein@uni-koeln.de,84,FALSE,36,8,TRUE,EU - Germany,800,Imaging Technologies
+KOL-015,Dr. Sophie Leclerc,Heart Failure,Hôpital de la Pitié-Salpêtrière,France,s.leclerc@aphp.fr,86,FALSE,39,9,TRUE,EU - Western,950,Patient Outcomes
+KOL-016,Dr. Michael Chen,Cardiology,Singapore General Hospital,Singapore,m.chen@sgh.com.sg,88,FALSE,43,11,TRUE,APAC - Singapore,1100,Clinical Excellence
+KOL-017,Dr. Gabriela Lopez,Heart Failure,Hospital Español Buenos Aires,Argentina,g.lopez@hospitalespanol.ar,77,FALSE,19,3,FALSE,LATAM,600,Emerging Growth
+KOL-018,Dr. Patricia van den Berg,Pharmacology,Amsterdam UMC,Netherlands,p.vandenberg@amc.uva.nl,83,FALSE,34,7,TRUE,EU - Benelux,750,Drug Interactions
+KOL-019,Dr. Robert Thompson,General Cardiology,Royal Brompton Hospital,UK,r.thompson@rbht.nhs.uk,81,FALSE,27,6,TRUE,EU - UK,700,NHS Guidelines
+KOL-020,Prof. Yuki Tanaka,Heart Failure,Tokyo Medical University,Japan,y.tanaka@tokyo-med.ac.jp,85,FALSE,40,10,TRUE,APAC - Japan,900,Asia-Pacific Lead
