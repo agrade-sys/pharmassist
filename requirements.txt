@@ -1,0 +1,8 @@
+python-dotenv
+gradio
+crewai
+langgraph
+langchain-openai
+pydantic
+pandas
+pypdf
