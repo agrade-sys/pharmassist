@@ -1,3 +1,14 @@
+---
+title: Pharmassist
+emoji: 🏥
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: "4.0"
+app_file: app.py
+pinned: false
+---
+
 # Pharmassist — Agentic Drug Launch Assistant
 
 A pharmaceutical AI application demonstrating agentic AI patterns learned from [The Complete Agentic AI Engineering Course (2025)] by Ed Donner. This project applies course concepts to real-world drug development workflows.
