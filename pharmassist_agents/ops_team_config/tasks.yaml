@@ -1,0 +1,113 @@
+analyze_trial_sites_task:
+  description: >
+    Analyze Phase IIb trial data from all 8 sites. Identify:
+    1. Enrollment status (current 740/788 = 93.9% - is this sufficient?)
+    2. Site performance ranking (completion %, dropout rates, protocol violations)
+    3. RED FLAGS: SITE-007 has 14% dropout + 5 protocol violations + 2 SAEs + "Delayed" status
+    4. Efficacy readiness (Phase IIb shows 8.9-12.1% LVEF improvement - meets Phase III threshold?)
+    5. Safety concerns (7 SAEs total, 0.95% rate - acceptable for Phase III?)
+    6. Recommendations for Phase III site selection and remediation needs
+  expected_output: >
+    Clinical Operations Assessment Report with:
+    - Site performance scorecard (ranked 1-8)
+    - SITE-007 remediation action plan
+    - Phase III enrollment strategy (how to scale from 8 sites to 35 sites)
+    - Patient safety readiness (SAE trends, monitoring requirements)
+    - Go/No-Go recommendation for Phase III initiation
+  agent: clinical_ops_agent
+
+assess_regulatory_compliance_task:
+  description: >
+    Evaluate regulatory readiness for Phase III. Review:
+    1. CMC status (75% complete - what's missing?)
+    2. Regulatory timeline feasibility (EMA Q2 2028, FDA Q4 2028 targets)
+    3. CRITICAL RISK: SITE-007 protocol violations (5 reported) - will this block EMA submission?
+    4. Arrhythmia SAEs in elderly patients - does this require additional Phase III monitoring?
+    5. GMP audit pending Q1 2026 - timeline impact?
+    6. Required submissions: IND (FDA), CTA (EMA) - timing and dependencies
+    7. Breakthrough Therapy Designation pathway - what does FDA need?
+  expected_output: >
+    Regulatory Readiness Assessment with:
+    - CMC gap analysis and closure timeline
+    - Submission readiness checklist (IND/CTA requirements)
+    - SITE-007 remediation impact on EMA submission timing
+    - Risk mitigation plan for arrhythmia signal management
+    - GMP audit preparation status
+    - Revised regulatory timeline with confidence level (High/Medium/Low)
+    - Go/No-Go recommendation with regulatory risks
+  agent: regulatory_ops_agent
+
+evaluate_manufacturing_capacity_task:
+  description: >
+    Assess manufacturing readiness for Phase III and commercial supply. Analyze:
+    1. Current capacity (50K tablets/month) vs Phase III needs (200K tablets/month = 4x expansion)
+    2. Timeline feasibility (12 months available before Phase III launch Q2 2026)
+    3. CRITICAL BOTTLENECK: API supplier single-source (Chemsynth AG) with 16-week lead time
+    4. Packaging supplier (Huhtamaki) - 8-week lead time, only 3 months stock
+    5. Expansion investment requirement ($8.5M) - capex approval status?
+    6. GMP audit Q1 2026 - will expanded facility pass inspection?
+    7. Safety stock strategy - what buffer is needed for Phase III continuity?
+  expected_output: >
+    Manufacturing Readiness Assessment with:
+    - Production capacity roadmap (Q1 2026, Q2 2026, Q3 2026 milestones)
+    - Supply chain risk matrix (API, packaging, other components)
+    - Backup supplier qualification plan (Malaysia API supplier)
+    - Capex approval timeline and contingency plans
+    - GMP readiness checklist for expanded facility
+    - Safety stock requirements and procurement schedule
+    - Go/No-Go recommendation with manufacturing constraints on Phase III timing
+  agent: manufacturing_ops_agent
+
+develop_kol_strategy_task:
+  description: >
+    Create Phase III KOL engagement and market strategy. Analyze:
+    1. Available KOLs (20 profiles in database, influence scores 77-98)
+    2. Phase IIb investigators (6 current - are they Phase III ready?)
+    3. "Not recommended" KOLs (4 marked FALSE - why exclude them?)
+    4. Geographic coverage needed (Germany primary, UK/France/Spain secondary, APAC tertiary)
+    5. Patient volume capacity (20 KOLs × avg 900 patients = 18K potential vs 1,200 Phase III need)
+    6. Influence score targeting (top 50 needed from 20 available - quality over quantity)
+    7. Research interest alignment (personalize outreach to their specialties)
+    8. Pricing strategy validation ($480/month - is it acceptable to KOLs?)
+  expected_output: >
+    Commercial Operations & KOL Strategy with:
+    - Top 50 KOL recommendations (priority ranking 1-20, secondary tier, marginal tier)
+    - Regional strategy (Germany 40%, EU 35%, APAC 25%)
+    - Phase III recruitment capacity assessment
+    - KOL outreach timeline and personalization strategy
+    - Pricing acceptance risk assessment
+    - Marketing materials prioritization (60% complete - what's critical first?)
+    - Go/No-Go recommendation with commercial readiness level
+  agent: commercial_ops_agent
+
+synthesize_operational_readiness_task:
+  description: >
+    Synthesize all four operational assessments into a unified Phase III go/no-go decision.
+    You have received reports from:
+    1. Clinical Ops: Site readiness, enrollment strategy, safety assessment
+    2. Regulatory Ops: CMC gaps, submission timeline, SITE-007 remediation impact
+    3. Manufacturing Ops: Production scaling, supply chain risks, capex requirements
+    4. Commercial Ops: KOL strategy, market readiness, pricing validation
+    
+    Your mission:
+    - Identify CRITICAL PATH ITEMS (what blocks Phase III most urgently?)
+    - Highlight interdependencies (e.g., manufacturing delays impact regulatory submission?)
+    - Create integrated action plan with milestones
+    - Assess overall Phase III readiness with confidence level
+    - Make GO/NO-GO recommendation with conditions if needed
+    - Prepare executive summary for C-suite decision (max 1 page)
+  expected_output: >
+    Operational Readiness Report - Phase III Go/No-Go Decision with:
+    - Executive Summary (1 page, C-suite ready)
+    - Critical Path Analysis (ranked by urgency and impact)
+    - Integrated Risk Dashboard:
+      * Clinical risks (SITE-007 remediation, enrollment strategy)
+      * Regulatory risks (CMC gaps, SITE-007 protocol violations impact)
+      * Manufacturing risks (capex approval, supply chain bottlenecks)
+      * Commercial risks (KOL engagement, pricing acceptance)
+    - Interdependency Map (how each domain affects others)
+    - 90-Day Action Plan with owners and milestones
+    - Phase III Go/No-Go Recommendation with conditions
+    - Confidence Level: High/Medium/Low
+    - Decision Date: 2025-09-30 (as per drug_profile.json)
+  agent: ops_manager

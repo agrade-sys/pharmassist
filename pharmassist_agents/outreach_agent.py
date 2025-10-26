@@ -3,7 +3,8 @@ import os
 import csv
 import io
 from dotenv import load_dotenv
-from agents import Agent, Runner, trace, function_tool
+from openai import OpenAI
+from openai.lib._agents import Agent, Runner
 from pydantic import BaseModel, Field
 from typing import Dict
 import asyncio
