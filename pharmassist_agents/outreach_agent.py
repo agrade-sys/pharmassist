@@ -1,15 +1,16 @@
 import gradio as gr
 import os
-import csv
-import io
+import json
 from dotenv import load_dotenv
 from openai import OpenAI
-from openai.lib._agents import Agent, Runner
 from pydantic import BaseModel, Field
 from typing import Dict
 import asyncio
 
 load_dotenv(override=True)
+
+# Initialize OpenAI client
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Structured output model for emails (Lab 3 concept)
 class EmailOutput(BaseModel):
@@ -17,8 +18,7 @@ class EmailOutput(BaseModel):
     body: str = Field(description="Complete email body text")
     tone: str = Field(description="Tone used: formal, scientific, or engaging")
 
-    # Tool functions for logging (Lab 2 @function_tool pattern)
-@function_tool
+# Tool functions for logging
 def record_doctor_outreach(doctor_name: str, specialty: str, email_tone: str) -> Dict[str, str]:
     """Record that outreach was generated for a specific doctor"""
     print(f"📧 Outreach Generated:")
@@ -27,7 +27,6 @@ def record_doctor_outreach(doctor_name: str, specialty: str, email_tone: str) ->
     print(f"   Tone: {email_tone}")
     return {"status": "recorded"}
 
-@function_tool
 def flag_for_followup(doctor_name: str, reason: str) -> Dict[str, str]:
     """Flag a doctor for manual follow-up"""
     print(f"🚩 Flagged for Follow-up:")
@@ -35,7 +34,7 @@ def flag_for_followup(doctor_name: str, reason: str) -> Dict[str, str]:
     print(f"   Reason: {reason}")
     return {"status": "flagged"}
 
-    # Three outreach agents with different styles (Lab 2 pattern)
+# Three outreach agents with different styles (Lab 2 pattern)
 formal_instructions = """You are a formal, professional medical outreach specialist.
 You write respectful, clinical emails to physicians about new pharmaceutical developments.
 Your tone is professional, evidence-based, and appropriate for peer-to-peer medical communication.
@@ -51,73 +50,137 @@ You write warm, conversational emails that build rapport while remaining profess
 Your tone is friendly and enthusiastic, highlighting practical patient benefits.
 Make the email feel personal and relevant to the physician's daily practice."""
 
-# Create the three agents
-formal_agent = Agent(
-    name="Formal Outreach Agent",
-    instructions=formal_instructions,
-    model="gpt-4o-mini",
-    output_type=EmailOutput
-)
+def generate_formal_email(doctor_name: str, specialty: str) -> str:
+    """Generate formal outreach email using OpenAI API"""
+    prompt = f"""Generate a formal, professional outreach email for:
+Doctor: Dr. {doctor_name}
+Specialty: {specialty}
 
-scientific_agent = Agent(
-    name="Scientific Outreach Agent", 
-    instructions=scientific_instructions,
-    model="gpt-4o-mini",
-    output_type=EmailOutput
-)
-
-engaging_agent = Agent(
-    name="Engaging Outreach Agent",
-    instructions=engaging_instructions,
-    model="gpt-4o-mini",
-    output_type=EmailOutput
-)
-# Convert agents to tools (Lab 2 agent-as-tool pattern)
-formal_tool = formal_agent.as_tool(
-    tool_name="formal_outreach",
-    tool_description="Generate a formal, professional medical outreach email"
-)
-
-scientific_tool = scientific_agent.as_tool(
-    tool_name="scientific_outreach", 
-    tool_description="Generate a scientific, research-focused outreach email"
-)
-
-engaging_tool = engaging_agent.as_tool(
-    tool_name="engaging_outreach",
-    tool_description="Generate an engaging, relationship-building outreach email"
-)
-
-# Manager agent that coordinates the three agents (Lab 2 orchestration pattern)
-manager_instructions = """You are an Outreach Manager coordinating physician outreach campaigns.
-
-Your workflow:
-1. Use ALL THREE outreach agent tools to generate three different email approaches
-2. Evaluate each email for effectiveness, appropriateness, and likelihood of response
-3. Select the SINGLE best email that balances professionalism with engagement
-4. Use record_doctor_outreach tool to log the outreach
-5. Return the winning email
-
-Be decisive in your choice. Consider the specialty and context when selecting."""
-
-outreach_manager = Agent(
-    name="Outreach Manager",
-    instructions=manager_instructions,
-    tools=[formal_tool, scientific_tool, engaging_tool, record_doctor_outreach],
-    model="gpt-4o-mini"
-)
-# Main outreach function using async/await (Lab 2 Runner pattern)
-async def generate_outreach(doctor_name: str, specialty: str) -> str:
-    """Generate outreach email for a doctor using multi-agent collaboration"""
+Introduce CardioRelief, a new drug for chronic heart failure. Focus on clinical data and efficacy.
+Return as JSON with 'subject' and 'body' fields."""
     
-    message = f"Generate the best outreach email for:\nDoctor: Dr. {doctor_name}\nSpecialty: {specialty}\n\nThe email should introduce CardioRelief, our new drug for chronic heart failure."
+    response = client.beta.chat.completions.parse(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": formal_instructions},
+            {"role": "user", "content": prompt}
+        ],
+        response_format=EmailOutput
+    )
+    return response.choices[0].message.parsed
+
+def generate_scientific_email(doctor_name: str, specialty: str) -> str:
+    """Generate scientific outreach email using OpenAI API"""
+    prompt = f"""Generate a scientific, research-focused outreach email for:
+Doctor: Dr. {doctor_name}
+Specialty: {specialty}
+
+Introduce CardioRelief, emphasizing trial data, LVEF improvement, and mechanisms of action.
+Return as JSON with 'subject' and 'body' fields."""
+    
+    response = client.beta.chat.completions.parse(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": scientific_instructions},
+            {"role": "user", "content": prompt}
+        ],
+        response_format=EmailOutput
+    )
+    return response.choices[0].message.parsed
+
+def generate_engaging_email(doctor_name: str, specialty: str) -> str:
+    """Generate engaging outreach email using OpenAI API"""
+    prompt = f"""Generate an engaging, warm outreach email for:
+Doctor: Dr. {doctor_name}
+Specialty: {specialty}
+
+Introduce CardioRelief in a friendly way, focusing on patient benefits and practical value.
+Return as JSON with 'subject' and 'body' fields."""
+    
+    response = client.beta.chat.completions.parse(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": engaging_instructions},
+            {"role": "user", "content": prompt}
+        ],
+        response_format=EmailOutput
+    )
+    return response.choices[0].message.parsed
+
+def select_best_email(doctor_name: str, specialty: str, formal: EmailOutput, scientific: EmailOutput, engaging: EmailOutput) -> tuple:
+    """Use OpenAI to evaluate and select the best email"""
+    prompt = f"""You are an Outreach Manager evaluating three email approaches for:
+Doctor: Dr. {doctor_name}
+Specialty: {specialty}
+
+Formal Email:
+Subject: {formal.subject}
+Body: {formal.body}
+
+Scientific Email:
+Subject: {scientific.subject}
+Body: {scientific.body}
+
+Engaging Email:
+Subject: {engaging.subject}
+Body: {engaging.body}
+
+Which email is BEST for this doctor? Reply with ONLY the word: formal, scientific, or engaging"""
+    
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    choice = response.choices[0].message.content.strip().lower()
+    
+    if "formal" in choice:
+        return formal, "formal"
+    elif "scientific" in choice:
+        return scientific, "scientific"
+    else:
+        return engaging, "engaging"
+
+async def generate_outreach(doctor_name: str, specialty: str) -> str:
+    """Generate outreach email using multi-agent collaboration"""
+    
+    print(f"\n🔄 Generating outreach for Dr. {doctor_name} ({specialty})...")
     
     try:
-        with trace("Doctor Outreach"):
-            print(f"\n🔄 Generating outreach for Dr. {doctor_name} ({specialty})...")
-            result = await Runner.run(outreach_manager, message)
-            print(f"✅ Outreach complete!\n")
-            return result.final_output
+        # Generate all three approaches
+        print("  📧 Generating formal email...")
+        formal_email = generate_formal_email(doctor_name, specialty)
+        
+        print("  📧 Generating scientific email...")
+        scientific_email = generate_scientific_email(doctor_name, specialty)
+        
+        print("  📧 Generating engaging email...")
+        engaging_email = generate_engaging_email(doctor_name, specialty)
+        
+        # Manager evaluates and selects best
+        print("  🤔 Manager evaluating approaches...")
+        best_email, tone = select_best_email(doctor_name, specialty, formal_email, scientific_email, engaging_email)
+        
+        # Record the outreach
+        record_doctor_outreach(doctor_name, specialty, tone)
+        
+        print(f"✅ Selected: {tone.upper()} approach\n")
+        
+        # Format output
+        output = f"""## ✅ Outreach Email Generated ({tone.upper()})
+
+**Subject:** {best_email.subject}
+
+---
+
+{best_email.body}
+
+---
+
+**Tone Used:** {best_email.tone}
+"""
+        return output
+        
     except Exception as e:
         error_msg = f"❌ Error generating outreach: {str(e)}"
         print(error_msg)
@@ -125,23 +188,23 @@ async def generate_outreach(doctor_name: str, specialty: str) -> str:
 
 def render_tab():
     """Render the Doctor Outreach agent interface"""
-    
+
     with gr.Column():
         gr.Markdown("""
         # 📧 Doctor Outreach Agent
-        
-        **Multi-Agent Email Generation System (Week 2 - Lab 2)**
-        
-        This agent uses **OpenAI Agents SDK** to coordinate three competing outreach agents:
+
+        **Multi-Agent Email Generation System (Week 2)**
+
+        This agent uses **OpenAI API** to coordinate three competing outreach approaches:
         - 🎩 Formal Agent - Professional, clinical communication
         - 🔬 Scientific Agent - Research-focused, data-driven
         - 🤝 Engaging Agent - Warm, relationship-building
-        
+
         The **Outreach Manager** evaluates all three and selects the best approach.
-        
-        **Demonstrates:** Multi-agent collaboration, agent-as-tool pattern, handoffs, structured outputs
+
+        **Demonstrates:** Multi-agent pattern, structured outputs, email generation
         """)
-        
+
         with gr.Row():
             doctor_name = gr.Textbox(
                 label="Doctor Name",
@@ -149,39 +212,34 @@ def render_tab():
                 value="Sarah Johnson"
             )
             specialty = gr.Textbox(
-                label="Specialty", 
+                label="Specialty",
                 placeholder="e.g., Cardiology",
                 value="Cardiology"
             )
-        
+
         generate_btn = gr.Button("🚀 Generate Outreach Email", variant="primary")
-        
+
         output = gr.Markdown(label="Generated Email")
-        
+
         def run_outreach(name, spec):
             """Wrapper to run async function in Gradio"""
             if not name or not spec:
                 return "❌ Please provide both doctor name and specialty"
-            
+
             try:
                 # Run async function in event loop
                 result = asyncio.run(generate_outreach(name, spec))
                 return result
             except Exception as e:
                 return f"❌ Error: {str(e)}"
-        
+
         generate_btn.click(
             fn=run_outreach,
             inputs=[doctor_name, specialty],
             outputs=output
         )
-        
+
         gr.Markdown("""
         ---
-        **Watch your terminal** for logs showing:
-        - Which agents were called
-        - The manager's decision process
-        - Doctor outreach records
-        
-        **Check OpenAI traces** at: https://platform.openai.com/traces
+        **Watch your terminal** for logs showing the three agent approaches and manager's decision.
         """)
