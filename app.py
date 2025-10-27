@@ -40,4 +40,4 @@ with gr.Blocks(title="Pharmassist: Drug Launch Assistant") as demo:
     with gr.Tab("Flow Creator"): 
         creator_tab()
 
-demo.launch(server_port=7860)
+demo.launch(server_port=7860)# Force rebuild
