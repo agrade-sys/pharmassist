@@ -40,4 +40,4 @@ with gr.Blocks(title="Pharmassist: Drug Launch Assistant") as demo:
     with gr.Tab("Flow Creator"): 
         creator_tab()
 
-demo.launch()
+demo.launch(share=False, server_name="0.0.0.0", server_port=7860)
