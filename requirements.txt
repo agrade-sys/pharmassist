@@ -1,5 +1,5 @@
 python-dotenv
-gradio
+gradio==4.44.1
 crewai
 langgraph
 langchain-openai
