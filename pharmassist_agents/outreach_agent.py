@@ -50,7 +50,7 @@ You write warm, conversational emails that build rapport while remaining profess
 Your tone is friendly and enthusiastic, highlighting practical patient benefits.
 Make the email feel personal and relevant to the physician's daily practice."""
 
-def generate_formal_email(doctor_name: str, specialty: str) -> str:
+def generate_formal_email(doctor_name: str, specialty: str) -> EmailOutput: 
     """Generate formal outreach email using OpenAI API"""
     prompt = f"""Generate a formal, professional outreach email for:
 Doctor: Dr. {doctor_name}
@@ -69,7 +69,7 @@ Return as JSON with 'subject' and 'body' fields."""
     )
     return response.choices[0].message.parsed
 
-def generate_scientific_email(doctor_name: str, specialty: str) -> str:
+def generate_scientific_email(doctor_name: str, specialty: str) -> EmailOutput:
     """Generate scientific outreach email using OpenAI API"""
     prompt = f"""Generate a scientific, research-focused outreach email for:
 Doctor: Dr. {doctor_name}
@@ -88,7 +88,7 @@ Return as JSON with 'subject' and 'body' fields."""
     )
     return response.choices[0].message.parsed
 
-def generate_engaging_email(doctor_name: str, specialty: str) -> str:
+def generate_engaging_email(doctor_name: str, specialty: str) -> EmailOutput:
     """Generate engaging outreach email using OpenAI API"""
     prompt = f"""Generate an engaging, warm outreach email for:
 Doctor: Dr. {doctor_name}
