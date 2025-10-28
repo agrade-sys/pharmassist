@@ -15,11 +15,13 @@ with gr.Blocks(title="Pharmassist: Drug Launch Assistant") as demo:
     Demonstrating concepts from [The Complete Agentic AI Engineering Course (2025)] by Ed Donner
     
     ### Implemented Agents:
-    - **Drug Profile** (Week 1) - Conversational AI with tool calling
-    - **Regulatory Brief** (Week 2) - Multi-agent collaboration with OpenAI SDK
+    - **Drug Profile** - Conversational AI with tool calling
+    - **Clinical Trials** - Data visualization and trial protocol analysis
+    - **Ops Team** - Multi-agent team coordination
+    - **Doctor Outreach** - Multi-agent email generation system
     
     ### Planned Agents:
-    - Doctor Outreach, Clinical Trials, Ops Team, Flow Creator
+    - Regulatory Brief, Flow Creator
     """)
     
     with gr.Tab("Drug Profile"): 
